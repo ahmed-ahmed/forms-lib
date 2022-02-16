@@ -1,5 +1,4 @@
-import { ITextBoxSchema } from "../schema/ItextBoxSchema";
-import { TextBoxSchema } from "../schema/TextBoxSchema";
+import { IControlProps } from "../shared/IControlProps";
 
 export enum TextBoxTypeEnum {
   'input',
@@ -7,38 +6,14 @@ export enum TextBoxTypeEnum {
   'email',
 }
 
-export interface ITextBoxProps {
+export interface ITextBoxProps extends IControlProps {
   /**
- * Pass the value for the text box
- * @description        You can also explicitly add a description name
- */
-
-  value?: string,
-  defaultValue?: string,
-  schema?: ITextBoxSchema,
-  schemaKey?: string,
-  onChange?,
-  onValidationChange?,
-  validateImmediately?,
-  customValidations?
-  [key: string]: any;
-}
-
-export class TextBoxProps implements ITextBoxProps {
-  constructor() {
-    this.schema = new TextBoxSchema()
-  }
-  schemaKey?: string;
-  onChange?: any;
-  onValidationChange?: any;
-  /**
-   * true: validate once rendered
-   * false: validate on blur
-   * @default false
-   */
-  validateImmediately?: boolean = false;
-  customValidations?: any;
-  defaultValue?: string;
+   * Pass the value for the text box
+   * @description        You can also explicitly add a description name
+  */
+  type?: TextBoxTypeEnum;
+  placeHolder?: string;
   value?: string;
-  schema?: ITextBoxSchema;
+  defaultValue?: string;
+  autofocus?: boolean;
 }

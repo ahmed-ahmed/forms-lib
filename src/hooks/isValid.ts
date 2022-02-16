@@ -4,26 +4,26 @@ import { IisValidParams, IsValidParams } from "./IisValidParams";
 const globaleValidationRules =
 {
   'required': {
-    isValid: (val, params) => Boolean(val),
+    isValid: (value, params) => Boolean(value),
     errorMessage: ({ title }) => `${title} is required`
   },
   'maxLength': {
-    isValid: (val, params) => value?.length > params.maxLength,
+    isValid: (value, params) => value?.length > params.maxLength,
     errorMessage: ({ maxLength }) => `Value cannot be longer than ${maxLength}`
   },
   'minLength': {
-    isValid: (val, params) => value?.length < params.minLength,
+    isValid: (value, params) => value?.length < params.minLength,
     errorMessage: ({ minLength }) => `Value cannot be less than ${minLength}`
   },
   'regex': {
-    isValid: (val, params) => !(params.regex.test(value)),
+    isValid: (value, params) => params.regex.test(value),
     errorMessage: ({ title }) => `${title} is not in the valid format`
   }
 }
 
 
 
-export default function useIsValid(params: IisValidParams) {
+export default function useIsValid(params) {
   const { schemaKey, value, schema, onValidationChange, validateImmediately, customValidations } = params;
   if (!schema) {
     return {

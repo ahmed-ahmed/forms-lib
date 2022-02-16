@@ -3,27 +3,29 @@ import classNames from 'classnames/bind';
 import { ValidationMessage } from "../ValidationMessage";
 import useIsValid from '../hooks/isValid';
 import { useState } from 'react';
-import { TextBoxProps, TextBoxTypeEnum } from './ITextBoxProps';
+import { ITextBoxProps, TextBoxTypeEnum } from './ITextBoxProps';
 
-export default function TextBox(props: TextBoxProps) {
-  const [ivalue, setIvalue] = useState<string>(props.value || props.schema?.defaultValue || '');
-
-  const { schemaKey, schema, onChange, onValidationChange, validateImmediately, customValidations } = props
-
-  const { error, errorMessage, setIsDirty, isValid } =
-    useIsValid({ schemaKey, value: ivalue, schema, onValidationChange, validateImmediately, customValidations });
-
+export default function TextBox(props: ITextBoxProps) {
+  const [ivalue, setIvalue] = useState<string>(props.value || props.defaultValue || '');
+  let regex = props.regex;
   let InputType: any = 'input';
-
-  switch (schema?.type) {
+  switch (props.type) {
     case TextBoxTypeEnum.textarea:
       InputType = 'textarea'
       break;
   }
 
-  if (schema?.type === TextBoxTypeEnum.email) {
-    schema.regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  if (props.type === TextBoxTypeEnum.email) {
+    regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   }
+
+
+
+  const { schemaKey, onChange, onValidationChange, validateImmediately, customValidations } = props
+  const { error, errorMessage, setIsDirty, isValid } =
+    useIsValid({ schemaKey, value: ivalue, schema: { ...props, regex }, onValidationChange, validateImmediately, customValidations });
+
+
 
   function handleChange(c) {
     setIvalue(c.target.value);
@@ -38,12 +40,12 @@ export default function TextBox(props: TextBoxProps) {
   return <>
     <InputType className={classNames('form-control', { error })}
       data-testid={schemaKey}
-      required={schema?.required}
-      autoFocus={schema?.autofocus}
+      required={props?.required}
+      autoFocus={props?.autofocus}
       value={ivalue}
       onChange={handleChange}
       onBlur={handleBlur}
-      placeholder={schema?.placeHolder || schema?.title} />
+      placeholder={props?.placeHolder || props?.title} />
 
     <div>{isValid}</div>
     <ValidationMessage invalid={error} message={errorMessage} />
