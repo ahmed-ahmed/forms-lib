@@ -3,20 +3,18 @@
 
 Basic Usage:
 
-Using schema
-
 ```tsx
 import React from 'react';
 import { TextBox } from 'docs';
 
-const schema = {
+const props = {
   required: true,
   title: 'Text Box',
   placeHolder: 'Place holder',
   
 }
 export default () => <>
-<TextBox {...schema} validateImmediately={true}/>
+<TextBox {...props} validateImmediately={true}/>
 </>
 ```
 
@@ -26,14 +24,14 @@ Text area
 import React from 'react';
 import { TextBox, TextBoxTypeEnum } from 'docs';
 
-const schema = {
+const props = {
   required: true,
   title: 'Text Box',
   placeHolder: 'Place holder',
   type: TextBoxTypeEnum.textarea
   
 }
-export default () => <TextBox {...schema} validateImmediately={false}/>;
+export default () => <TextBox {...props} validateImmediately={false}/>;
 ```
 
 email
@@ -41,14 +39,14 @@ email
 import React from 'react';
 import { TextBox, TextBoxTypeEnum } from 'docs';
 
-const schema = {
+const props = {
   required: true,
   title: 'Text Box',
   placeHolder: 'Please enter email',
   type: TextBoxTypeEnum.email
   
 }
-export default () => <TextBox {...schema} validateImmediately={false}/>;
+export default () => <TextBox {...props} validateImmediately={false}/>;
 ```
 
 <API></API>

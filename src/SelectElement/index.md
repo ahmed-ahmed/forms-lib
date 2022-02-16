@@ -3,24 +3,28 @@
 
 Basic Usage:
 
-Using schema
-
 ```tsx
 import React from 'react';
 import { SelectElement } from 'docs';
-
 const options = [
         { value: 'chocolate', label: 'Chocolate' },
         { value: 'strawberry', label: 'Strawberry' },
         { value: 'vanilla', label: 'Vanilla' }
     ]
 
-const schema = {
+const props = {
   options,
   title: 'Food'
   
 }
-export default () => <SelectElement {...schema} required={true} />;
+
+const onChange= (selected) => {
+  console.log({selected})
+}
+
+export default () => <>
+    <SelectElement {...props} required={true} onChange={onChange} />
+  </>
 ```
 
 Grouped Options
@@ -53,12 +57,12 @@ const options = [
   {label: 'Flavours',options: flavourOptions} 
 ];
 
-const schema = {
+const props = {
   options,
   title: 'Color'
   
 }
-export default () => <SelectElement {...schema}/>;
+export default () => <SelectElement {...props}/>;
 ```
 
 

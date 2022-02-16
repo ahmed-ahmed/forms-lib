@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { IisValidParams, IsValidParams } from "./IisValidParams";
+import { IValidationProps } from "./IisValidParams";
 
 const globaleValidationRules =
 {
